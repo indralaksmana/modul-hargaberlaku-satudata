@@ -1,8 +1,6 @@
 # modul-hargaberlaku-satudata
 Satudata module hargaberlaku repository
 
-## TO DO :
-
 This Package is part of Satudata
 ================================
 
@@ -62,5 +60,3 @@ $ composer dump-autoload
 $ php artisan migrate --seed
 $ npm run dev
 ```
-## DEMO :
-## CHANGELOG :
