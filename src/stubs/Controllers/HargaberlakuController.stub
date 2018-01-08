@@ -1,0 +1,127 @@
+<?php namespace App\Http\Controllers;
+
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use App\Models\HargaBerlaku;
+use App\Models\MasterWilayah;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
+
+/**
+ * The HargaberlakuController class.
+ *
+ * @package Satudata\Hargaberlaku
+ * @author  mki <info@mkitech.net>
+ */
+class HargaberlakuController extends Controller
+{
+    public function getIndex(Request $request){
+        return view('main');
+    }
+
+    public function getList(Request $request)
+    {
+        $year = HargaBerlaku::year()->get();
+        $kota = HargaBerlaku::kotakode()->get();
+
+        $a=0;
+        $b=0;
+        $datas = array();
+        foreach ($kota as $kotas){
+            foreach ($year as $years){
+
+                $query = DB::table('hargaberlaku');
+                $query = $query->select(DB::raw("hargaberlakukotakode, kota_nama, SUM(hargaberlakuvalue) as hargaberlakuvalue, EXTRACT(YEAR FROM hargaberlakutgl) as tahun"));
+                $query = $query->join('master_kota','master_kota.kota_kode','=','hargaberlaku.hargaberlakukotakode');
+                $query = $query->whereBetween('hargaberlakutgl', array($years->tahun.'-01-01', $years->tahun.'-12-31'));
+                $query = $query->where('hargaberlakukotakode', $kotas->hargaberlakukotakode);
+                $query = $query->groupBy(array('hargaberlakukotakode', 'kota_nama', 'tahun'));
+                $haragaberlaku = $query->orderBy('tahun')->get();
+
+                if(!$haragaberlaku->isEmpty()){
+                    foreach ($haragaberlaku as $harga){
+                        $datas[$a]['kode'] = $harga->hargaberlakukotakode;
+                        $datas[$a]['kota'] = $harga->kota_nama;
+                        $datas[$a][$years->tahun] = $harga->hargaberlakuvalue;
+                    }
+                }else{
+                    $datas[$a][$years->tahun] = '-';
+                }
+                $b++;
+            }
+            $a++;
+        }
+
+//        return response()->json($kota);
+//        return response()->json($year);
+//        die;
+
+        return response()->json($datas);
+    }
+
+    public function createHargaberlakuSave(Request $request)
+    {
+        $var = $request->input('hargaberlakuTgl');
+        $date = str_replace('/', '-', $var);
+        $date_format = date('Y-m-d', strtotime($date));
+
+        $hargaberlaku = new HargaBerlaku();
+        $hargaberlaku->hargaberlakuvalue              = $request->input('hargaberlakuValue');
+        $hargaberlaku->hargaberlakutgl                = $date_format;
+        $hargaberlaku->hargaberlakuprovincekode       = $request->input('hargaberlakuProvinceKode');
+        $hargaberlaku->hargaberlakukotakode           = $request->input('hargaberlakuKotaKode');
+        $hargaberlaku->hargaberlakucreatedate         = date('Y-m-d H:i:s');
+        $hargaberlaku->hargaberlakucreateby           = 1;
+        $hargaberlaku->hargaberlakustatus             = 1;
+
+        if($hargaberlaku->save())
+        {
+            $responses = array('message' => 'Penambahan telah disimpan.');
+        }else{
+            $responses = array('message' => 'Terjadi kesalaahan. Penambahan gagal disimpan.');
+        }
+        return response()->json($responses);
+    }
+
+    public function getKota($id)
+    {
+        $kota = MasterWilayah::kotaByKode($id)->get();
+        return response()->json($kota);
+    }
+
+    public function getProvinsi(){
+        $provinsi = MasterWilayah::provinsi()->get();
+        return response()->json($provinsi);
+    }
+
+    public function getColumns()
+    {
+        $data1 = array(
+            array(
+                'label' => 'Kode',
+                'field' => 'kode',
+                'numeric' => false,
+                'html' => false
+            ),
+            array(
+                'label' => 'Kota',
+                'field' => 'kota',
+                'numeric' => false,
+                'html' => false
+            ),
+        );
+
+        $year = HargaBerlaku::year()->get();
+        $data2 = array();
+        $i=0;
+        foreach($year as $y){
+            $data2[$i]['label'] = $y->tahun;
+            $data2[$i]['field'] = $y->tahun;
+            $data2[$i]['numeric'] = true;
+            $data2[$i]['html'] = false;
+            $i++;
+        }
+        $datas = array_merge($data1, $data2);
+        return response()->json($datas);
+    }
+}
