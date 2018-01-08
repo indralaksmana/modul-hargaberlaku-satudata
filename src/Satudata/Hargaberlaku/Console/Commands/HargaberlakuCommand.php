@@ -70,8 +70,7 @@ class HargaberlakuCommand extends Command
     {
         foreach($this->stubsModel['models'] as $stub)
         {
-            File::makeDirectory(base_path('app/Models'));
-            File::put(base_path('app/Models/').str_replace('stub','php',$stub),File::get(__DIR__.'/../../../../stubs/Models/'.$stub));
+            File::put(base_path('app/').str_replace('stub','php',$stub),File::get(__DIR__.'/../../../../stubs/Models/'.$stub));
         }
     }
     protected function routeViewCreate()
