@@ -1,5 +1,3 @@
-<?php
-
 Route::group(['prefix' => 'hargaberlaku', 'middleware' => ['web']], function() {
     Route::get('/', 'Satudata\Hargaberlaku\Http\Controllers\HargaBerlakuController@getIndex');
     Route::get('/list', 'Satudata\Hargaberlaku\Http\Controllers\HargaBerlakuController@getList');
