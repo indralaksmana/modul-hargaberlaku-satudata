@@ -12,7 +12,7 @@ return [
     |
     */
 
-    'author'         => 'mki',
+    'author'         => 'MKI',
     'email'          => 'info@mkitech.net',
     'package_vendor' => 'Satudata',
     'package_name'   => 'Hargaberlaku'

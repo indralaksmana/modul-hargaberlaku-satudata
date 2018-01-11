@@ -4,7 +4,7 @@
  * The HargaberlakuInterface interface
  *
  * @package Satudata\Hargaberlaku
- * @author  mki <info@mkitech.net>
+ * @author  MKI <info@mkitech.net>
  */
 interface HargaberlakuInterface
 {

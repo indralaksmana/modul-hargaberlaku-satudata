@@ -36,7 +36,7 @@ class HargaberlakuController extends Controller
                 $query = $query->whereBetween('hargaberlakutgl', array($years->tahun.'-01-01', $years->tahun.'-12-31'));
                 $query = $query->where('hargaberlakukotakode', $kotas->hargaberlakukotakode);
                 $query = $query->groupBy(array('hargaberlakukotakode', 'kota_nama', 'tahun'));
-                $haragaberlaku = $query->orderBy('tahun')->get();
+                $haragaberlaku = $query->orderBy('tahun','ASC')->get();
 
                 if(!$haragaberlaku->isEmpty()){
                     foreach ($haragaberlaku as $harga){
@@ -111,7 +111,7 @@ class HargaberlakuController extends Controller
             ),
         );
 
-        $year = HargaBerlaku::year()->get();
+        $year = HargaBerlaku::year()->orderBy('tahun','ASC')->get();
         $data2 = array();
         $i=0;
         foreach($year as $y){

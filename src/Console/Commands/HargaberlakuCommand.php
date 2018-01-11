@@ -7,7 +7,7 @@ use File;
  * The HargaberlakuCommand class.
  *
  * @package Satudata\Hargaberlaku
- * @author  mki <info@mkitech.net>
+ * @author  MKI <info@mkitech.net>
  */
 class HargaberlakuCommand extends Command
 {
@@ -24,7 +24,7 @@ class HargaberlakuCommand extends Command
      *
      * @var string
      */
-    protected $description = 'Create Controllers, Models, and Routes command for Modul Harga Berlaku Satudata Banten package';
+    protected $description = 'Create Controllers, Models, seeds, and Routes command for Modul Harga Berlaku Satudata package';
 
     /**
      * The console command variable.
@@ -63,25 +63,25 @@ class HargaberlakuCommand extends Command
     {
         foreach($this->stubsController['controllers'] as $stub)
         {
-            File::put(base_path('app/Http/Controllers/').str_replace('stub','php',$stub),File::get(__DIR__.'/../../../../stubs/Controllers/'.$stub));
+            File::put(base_path('app/Http/Controllers/').str_replace('stub','php',$stub),File::get(__DIR__.'/../../stubs/Controllers/'.$stub));
         }
     }
     protected function modelViewCreate()
     {
         foreach($this->stubsModel['models'] as $stub)
         {
-            File::put(base_path('app/').str_replace('stub','php',$stub),File::get(__DIR__.'/../../../../stubs/Models/'.$stub));
+            File::put(base_path('app/').str_replace('stub','php',$stub),File::get(__DIR__.'/../../stubs/Models/'.$stub));
         }
     }
     protected function routeViewCreate()
     {
-        File::append(base_path('routes/web.php'),File::get(__DIR__.'/../../../../stubs/routesweb.stub'));
+        File::append(base_path('routes/web.php'),File::get(__DIR__.'/../../stubs/routesweb.stub'));
     }
     protected function seedsViewCreate()
     {
         foreach($this->stubsSeeds['seeds'] as $stub)
         {
-            File::put(base_path('database/seeds/').str_replace('stub','php',$stub),File::get(__DIR__.'/../../../../stubs/seeds/'.$stub));
+            File::put(base_path('database/seeds/').str_replace('stub','php',$stub),File::get(__DIR__.'/../../stubs/seeds/'.$stub));
         }
     }
 
@@ -96,6 +96,6 @@ class HargaberlakuCommand extends Command
         $this->modelViewCreate();
         $this->routeViewCreate();
         $this->seedsViewCreate();
-        $this->info('Create Controllers, Models, and Routes command for Modul Harga Berlaku Satudata Banten package Success.');
+        $this->info('Create Controllers, Models, seeds, and Routes command for Modul Harga Berlaku Satudata package success');
     }
 }

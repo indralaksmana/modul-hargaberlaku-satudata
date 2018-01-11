@@ -7,7 +7,7 @@ use Satudata\Hargaberlaku\Console\Commands\HargaberlakuCommand;
  * The HargaberlakuServiceProvider class
  *
  * @package Satudata\Hargaberlaku
- * @author  mki <info@mkitech.net>
+ * @author  MKI <info@mkitech.net>
  */
 class HargaberlakuServiceProvider extends ServiceProvider
 {
@@ -73,7 +73,7 @@ class HargaberlakuServiceProvider extends ServiceProvider
      */
     protected function routeHandle()
     {
-        $this->loadRoutesFrom(__DIR__.'/../../routes/routes.php');
+        $this->loadRoutesFrom(__DIR__.'/routes/routes.php');
     }
 
     /**
@@ -83,7 +83,7 @@ class HargaberlakuServiceProvider extends ServiceProvider
      */
     protected function configHandle()
     {
-        $packageConfigPath = __DIR__.'/../../config/config.php';
+        $packageConfigPath = __DIR__.'/config/config.php';
         $appConfigPath     = config_path('hargaberlaku.php');
 
         $this->mergeConfigFrom($packageConfigPath, 'hargaberlaku');
@@ -100,7 +100,7 @@ class HargaberlakuServiceProvider extends ServiceProvider
      */
     protected function langHandle()
     {
-        $packageTranslationsPath = __DIR__.'/../../resources/lang';
+        $packageTranslationsPath = __DIR__.'/resources/lang';
 
         $this->loadTranslationsFrom($packageTranslationsPath, 'hargaberlaku');
 
@@ -116,7 +116,7 @@ class HargaberlakuServiceProvider extends ServiceProvider
      */
     protected function viewHandle()
     {
-        $packageViewsPath = __DIR__.'/../../resources/assets/components';
+        $packageViewsPath = __DIR__.'/resources/assets/components';
         $this->publishes([
             $packageViewsPath => resource_path('assets/components'),
         ], 'views');
@@ -129,7 +129,7 @@ class HargaberlakuServiceProvider extends ServiceProvider
      */
     protected function assetHandle()
     {
-        $packageAssetsPath = __DIR__.'/../../resources/assets';
+        $packageAssetsPath = __DIR__.'/resources/assets';
 
         $this->publishes([
             $packageAssetsPath => public_path('vendor/hargaberlaku'),
@@ -143,7 +143,7 @@ class HargaberlakuServiceProvider extends ServiceProvider
      */
     protected function migrationHandle()
     {
-        $packageMigrationsPath = __DIR__.'/../../database/migrations';
+        $packageMigrationsPath = __DIR__.'/database/migrations';
 
         $this->loadMigrationsFrom($packageMigrationsPath);
 

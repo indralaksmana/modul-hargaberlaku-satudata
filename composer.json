@@ -1,11 +1,11 @@
 {
     "name": "indralaksmana/modul-hargaberlaku-satudata",
-    "description": "package from application satu data banten",
+    "description": "This package is one of satudata banten modules",
     "type": "Module",
     "license": "MIT",
     "authors": [
         {
-            "name": "mki",
+            "name": "MKI",
             "email": "info@mkitech.net"
         }
     ],
@@ -18,7 +18,7 @@
             "src/helpers/helpers.php"
         ],
         "psr-4": {
-            "Satudata\\Hargaberlaku\\": "src/Satudata/Hargaberlaku"
+            "Satudata\\Hargaberlaku\\": "src"
         }
     },
     "minimum-stability": "stable"

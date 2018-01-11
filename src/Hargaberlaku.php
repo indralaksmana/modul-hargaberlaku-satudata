@@ -4,7 +4,7 @@
  * The Hargaberlaku class.
  *
  * @package Satudata\Hargaberlaku
- * @author  mki <info@mkitech.net>
+ * @author  MKI <info@mkitech.net>
  */
 class Hargaberlaku
 {

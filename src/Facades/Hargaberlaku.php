@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Facade;
  * The Hargaberlaku facade.
  *
  * @package Satudata\Hargaberlaku
- * @author  mki <info@mkitech.net>
+ * @author  MKI <info@mkitech.net>
  */
 class Hargaberlaku extends Facade
 {
