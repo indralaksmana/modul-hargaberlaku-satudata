@@ -1,5 +1,5 @@
 # modul-hargaberlaku-satudata
-Satudata module hargaberlaku repository
+This is one module of Satudata Banten Application
 
 This Package is part of Satudata
 ================================
